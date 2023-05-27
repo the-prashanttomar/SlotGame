@@ -5,7 +5,7 @@ import { MainLogic } from '../components/mainLogic';
 import { Scene } from '../core/scene';
 import { default as data } from './../data';
 import { Container } from '@pixi/display';
-
+import * as PIXI from 'pixi.js';
 const TEXT_STYLE = new TextStyle({
   fontSize: 36,
   fill: 0xffffff,
@@ -21,6 +21,7 @@ const NUMBER_FORMAT = new Intl.NumberFormat('de-DE', {
 
 export class GameScene extends Scene {
   private machine: MainLogic;
+  private Particle: Emitter;
   private introContainer: Container;
   private loadingBar: Container;
   private GameContainer: Container;
@@ -155,7 +156,6 @@ export class GameScene extends Scene {
     this.spin_button.buttonMode = true;
     //@ts-ignore
     this.spin_button.on('pointerdown', () => {
-      this.machine.killInterval()
       this.spin();
     });
     this.buttonContainer.addChild(this.spin_button);
