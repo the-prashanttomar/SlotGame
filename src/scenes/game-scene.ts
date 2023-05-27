@@ -21,7 +21,6 @@ const NUMBER_FORMAT = new Intl.NumberFormat('de-DE', {
 
 export class GameScene extends Scene {
   private machine: MainLogic;
-  private Particle: Emitter;
   private introContainer: Container;
   private loadingBar: Container;
   private GameContainer: Container;
