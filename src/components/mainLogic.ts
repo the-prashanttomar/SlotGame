@@ -1,5 +1,7 @@
 import { Container } from '@pixi/display';
 import { Reel } from './reel';
+import * as PIXI from 'pixi.js';
+import gsap from 'gsap';
 
 
 
@@ -14,7 +16,6 @@ export class MainLogic extends Container {
 
   constructor(width: number, height: number, numberOfReels: number = 5) {
     super();
-
     this.reels = [];
     const slicedWidth = width / numberOfReels;
     for (let i = 0; i < numberOfReels; i++) {
@@ -68,23 +69,19 @@ export class MainLogic extends Container {
       for(let j=1;j<4;j++){
         const symNum = this.reels[i].tiles[j].sprite._texture.textureCacheIds[0]
         if(symNum === "sym10" || symNum === "sym12" || symNum === "sym3"){
-          totalSymbols++
-          this.Syminterval = setInterval(() => {
-            this.zoomInTxt(this.reels[i].tiles[j].sprite)
-          }, 40/totalSymbols);
+          this.reels[i].tiles[j].sprite.scale.set(1);
+          gsap.to(this.reels[i].tiles[j].sprite.scale, {
+            x: 0.9,
+            y: 0.9,
+            duration: 0.2,
+            repeat: -1,
+            yoyo: true, 
+            repeatDelay: 0, 
+            ease: 'power1.out'
+          });
         }
       }
     }
-  }
-  private zoomInTxt(symbol:any):void {
-    this.symbolScale -= 0.002 * this.symbolDirection;
-    symbol.scale.set(this.symbolScale);
-    if (this.symbolScale <= 0.95 || this.symbolScale > 1) {
-      this.symbolDirection *= -1;
-    }
-  }
-  public killInterval():void {
-    clearInterval(this.Syminterval);
   }
   public getTotalSpin():boolean{
     if(this.totalSPins ===3){
