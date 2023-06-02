@@ -1,7 +1,8 @@
 import { Application } from '@pixi/app';
 import { ConstructorOfScene, Scene } from './scene';
-const WIDTH = 2048;
-const HEIGHT = 1343;
+import * as PIXI from 'pixi.js';
+const WIDTH = 1920;
+const HEIGHT = 1080;
 
 type GameConfig = {
   width?: number;
@@ -20,8 +21,8 @@ export class Game<
 
   constructor(config: GameConfig & { scenes: T }) {
     this.app = new Application({
-      width: config.width || 800,
-      height: config.height || 600,
+      width: config.width,
+      height: config.height,
       backgroundColor: config.color || 0x000000,
       resolution: config.resolution || 1,
       autoDensity: true,
