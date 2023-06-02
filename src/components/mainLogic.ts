@@ -16,6 +16,7 @@ export class MainLogic extends Container {
 
   constructor(width: number, height: number, numberOfReels: number = 5) {
     super();
+
     this.reels = [];
     const slicedWidth = width / numberOfReels;
     for (let i = 0; i < numberOfReels; i++) {
@@ -73,11 +74,11 @@ export class MainLogic extends Container {
           gsap.to(this.reels[i].tiles[j].sprite.scale, {
             x: 0.9,
             y: 0.9,
-            duration: 0.2,
+            duration: 0.3,
             repeat: -1,
             yoyo: true, 
             repeatDelay: 0, 
-            ease: 'power1.out'
+            ease: 'Sine.easeInOut'
           });
         }
       }
@@ -90,5 +91,5 @@ export class MainLogic extends Container {
     else{
       return false;
     }
-  }
+  }  
 }
